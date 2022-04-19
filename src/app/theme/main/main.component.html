@@ -1,0 +1,79 @@
+<br>
+
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-md-6">
+
+      <div class="card">
+
+        <div class="card-header">
+          Ingresar datos
+        </div>
+
+        <div class="card-body">
+
+          <form [formGroup]="formParent" >
+            Nombre del pais: <input class="form-control"   placeholder="Ingresa pais" formControlName="country" type="text" name="nombre" id="">
+            <br>
+
+            <div class="form-grid" formArrayName="area">
+
+              <div class="form-field" *ngFor="let areas of getCtrl('area',formParent).controls;index as formChild">
+
+                  <div [formGroupName]="formChild">
+                      <div >
+                          <input class="form-control" type="text" placeholder="name" formControlName="name">
+                      </div>
+                      <div>
+                          <input class="form-control" type="text" placeholder="description" formControlName="description">
+                      </div>
+
+                      <button style="margin: 5px;" type="button" class="btn btn-danger" (click)="removeValidation(formChild,'description'&&'name')">Remover Validación </button>
+                      <button style="margin: 5px;" type="button" class="btn btn-info" (click)="addValidation(formChild,'description'&&'name')">Agregar validación</button>
+                  </div>
+
+              </div>
+
+          </div>
+
+
+          </form>
+          <button type="button" class="btn btn-success" (click)="addArea()">Agregar Area</button>
+        </div>
+        
+
+      </div>
+
+    </div>
+
+    <div class="col-md-6">
+      <table class="table">
+
+
+
+        <tbody>
+
+          <tr   >
+            <div >
+              <div><b>Es valido el fomulario?: </b>
+                  <span *ngIf="formParent.valid">✔</span>
+                  <span *ngIf="!formParent.valid">🔴</span>
+              </div>
+              <pre>{{formParent.value | json}}</pre>
+          </div>
+
+            
+          </tr>
+          
+
+        </tbody>
+
+      </table>
+      
+    </div>
+
+  </div>
+
+</div>
